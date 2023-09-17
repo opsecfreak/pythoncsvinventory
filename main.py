@@ -11,6 +11,15 @@ log_file_path = "program.log"
 csv_file_path = "inventory.csv"
 
 
+def initialize_csv():
+    """Initialize the CSV file if it doesn't exist."""
+    if not os.path.exists(csv_file_path):
+        with open(csv_file_path, "w", newline="") as csvfile:
+            writer = csv.writer(csvfile)
+            writer.writerow(["Product Name", "Category", "Model Number", "Stock", "Listings", "Notes"])
+            log_activity("Initialized inventory.csv.")
+
+
 def clear_screen():
     if os.name == 'nt':  # For Windows
         _ = os.system('cls')
@@ -22,8 +31,18 @@ def clear_screen():
 
 
 def log_activity(activity):
-    """Log activity with timestamp."""
-    with open(log_file_path, "a") as log_file:
+    """Log activity with timestamp and initialize files if not found."""
+
+    # Initialize log file if not found
+    if not os.path.exists(log_file_path):
+        open(log_file_path, 'w').close()
+        log_activity("Initialized program.log.")
+
+    # Initialize CSV file
+    initialize_csv()
+
+    # Log the activity
+    with open(log_file_path, "a+") as log_file:
         log_file.write(f"{datetime.datetime.now()} - {activity}\n")
 
 
@@ -132,5 +151,3 @@ if __name__ == "__main__":
         else:
             print("Invalid choice. Please try again.")
         # Clear the screen
-
-
