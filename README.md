@@ -1,6 +1,5 @@
-# Complete Python Inventory System
 # Inventory Management System - Documentation
-# Project Description
+    Written in python, ported to Windows. Efficient Inventory Management.
 
 The Inventory Management System is a Python-based application designed to manage and maintain an inventory of various types of products. The system is console-based and allows for various operations, such as adding new inventory items, updating existing listings, and generating statistics.
 #Features
